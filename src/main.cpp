@@ -20,6 +20,10 @@ void setup()
     // Set the amount of bits for the ADC to the defined one for a better resolution on the analog readings.
     analogReadResolution(ANALOG_RESOLUTION);
 
+    // Set the pinmode for all pins with digital buttons connected to PULLUP, as that's the standard for working with digital buttons.
+    for(int i = 0; i < DIGITAL_KEYS; i++)
+        pinMode(DIGITAL_PIN(i), INPUT_PULLUP);
+
     // Allows to boot into UF2 bootloader mode by pressing the reset button twice.
     rp2040.enableDoubleResetBootloader();
 }

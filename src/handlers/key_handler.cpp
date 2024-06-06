@@ -148,8 +148,8 @@ void KeyHandler::scanHEKey(HEKey &key)
 
 void KeyHandler::scanDigitalKey(DigitalKey &key)
 {
-    // Read the digital key and save the pin status in the key.
-    key.isHigh = digitalRead(DIGITAL_PIN(key.index)) == PinStatus::HIGH;
+    // Read the digital key and consider it pressed if the pin status is LOW (because of PULLUP).
+    key.pressed = digitalRead(DIGITAL_PIN(key.index)) == PinStatus::LOW;
 }
 
 void KeyHandler::checkHEKey(HEKey &key)
@@ -207,15 +207,15 @@ void KeyHandler::checkHEKey(HEKey &key)
 
 void KeyHandler::checkDigitalKey(DigitalKey &key)
 {
-    // Check whether the pin status on the key is HIGH and the key is fully debounced.
-    if (key.isHigh && millis() - key.lastDebounce >= DIGITAL_DEBOUNCE_DELAY)
+    // Check whether the key is pressed and debounced.
+    if (key.pressed && millis() - key.lastDebounce >= DIGITAL_DEBOUNCE_DELAY)
     {
         // Set the key to pressed and update the last debounce time.
         setPressedState(key, true);
         key.lastDebounce = millis();
     }
     // If the key is not pressed, just set it to unpressed.
-    else if (!key.isHigh)
+    else if (!key.pressed)
         setPressedState(key, false);
 }
 

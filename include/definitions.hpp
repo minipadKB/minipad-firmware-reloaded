@@ -1,7 +1,7 @@
 #pragma once
 
 // The version of this firmware in the YYYY.MDD.PATCH format. (e.g. 2022.1219.2 for the 2nd release on the 19th december 2022)
-#define FIRMWARE_VERSION "2024.309.1"
+#define FIRMWARE_VERSION "2024.606.1"
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │                                                                                                   │
@@ -82,8 +82,9 @@
 // NOTE: By the RP2040, the amount of analog pins (and therefore keys) is limited o 4.
 #define HE_PIN(index) A0 + HE_KEYS - index - 1
 
-// Macro for getting the pin of the specified index of the digital key. The pin order is not swapped here, meaning
-// the first digital key is on pin 0, the second on 1, and so on.
+// Macro for getting the pin of the specified index of the digital key. The pin order is swapped here, meaning
+// the first digital key is on DIGITAL_KEYS - 1, the second on DIGITAL_KEYS - 2, and so on.
+// For 3 digital keys, this would mean that the keys 1, 2 and 3 are bound to the pins 2, 1 and 0 respectively.
 // NOTE: This way, the amount of keys is limited to 26 since the 27th key overlaps with the first analog port, 26.
 #define DIGITAL_PIN(index) 0 + DIGITAL_KEYS - index - 1
 
