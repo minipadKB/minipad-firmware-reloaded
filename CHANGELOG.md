@@ -1,4 +1,4 @@
-# 2024.309.1 - Proper digital key support
+# 2024.606.1 - Proper digital key support
 
 This release brings proper support for digital keys. Until now, the implementation of digital keys has been poorly as there was no INPUT_PULLUP on the pins by default, which is annoying to users of the firmware as in almost all cases this is required for mechanical switches or simple push buttons to work.
 
