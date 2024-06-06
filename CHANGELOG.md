@@ -1,3 +1,13 @@
+# 2024.606.1 - Proper digital key support
+
+This release brings proper support for digital keys. Until now, the implementation of digital keys has been poorly as there was no INPUT_PULLUP on the pins by default, which is annoying to users of the firmware as in almost all cases this is required for mechanical switches or simple push buttons to work.
+
+This and more is changed now so that digital keys can easily be supported out-of-the-box.
+
+## Changes
+- `pinMode(pin, INPUT_PULLUP)` is now invoked on every pin assigned to a digital key
+- Instead of `HIGH`, `LOW` is now considered as pressed down on digital keys
+
 # 2024.309.1 - Auto-calibration & Gauss correction
 
 This release was long overdue. Auto-calibration has been added, removing the need to manually calibrate the rest- and down positions via minitool.
